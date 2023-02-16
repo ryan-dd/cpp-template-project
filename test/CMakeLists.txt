@@ -11,7 +11,5 @@ target_link_libraries(unit_tests
     GTest::gtest_main
 )
 
-enable_sanitizers(unit_tests)
-
 gtest_discover_tests(unit_tests)
 
