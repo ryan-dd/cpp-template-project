@@ -1,18 +1,24 @@
-cmake_minimum_required (VERSION 3.7.2)
-project(SampleProject)
+cmake_minimum_required(VERSION 3.7.2)
+
+project(SampleProject 
+  VERSION 1.0.0
+  LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
-
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup(TARGETS NO_OUTPUT_DIRS)
-
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-include(cmake/StaticAnalyzers.cmake)
 
-set(PROJECT_WARNINGS -Wall -Wshadow -Wnon-virtual-dtor -pedantic)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+# Add cmake utility functions
+include(CompilerWarnings)
+include(StaticAnalyzers)
 
 add_subdirectory(src)
-add_subdirectory(test)
+
+include(CTest)
+if (BUILD_TESTING)
+    add_subdirectory(test)
+endif()
+

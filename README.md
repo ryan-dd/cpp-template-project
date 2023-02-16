@@ -1,13 +1,12 @@
 # cpp-template-project
 
-A template repo to help me set up a c++ project.
+A template repo to set up a C++ project for gcc and clang
 
 ## Build requirements
 
 CMake and Conan
 
 ## To build
-
 
 `conan install . -if build`
 
