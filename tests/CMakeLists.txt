@@ -1,6 +1,8 @@
 include(CTest)
 
 find_package(GTest REQUIRED)
+include(GoogleTest) # for gtest cmake macros
+
 add_executable(unit_tests 
   SampleTest.cpp
 )

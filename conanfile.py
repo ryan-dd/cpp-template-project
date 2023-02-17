@@ -10,7 +10,7 @@ class SampleProjectConan(ConanFile):
     license = "MIT"
     description = "C++ template project"
     settings = "os", "compiler", "arch", "build_type"
-    generators = "CMakeToolchain"
+    generators = "CMakeToolchain", "CMakeDeps"
 
     scm = {
         "type": "git",
@@ -42,6 +42,9 @@ class SampleProjectConan(ConanFile):
             self.test_requires("gtest/[>=1.8.1]")
         if(self.options.build_docs):
             self.tool_requires("doxygen/[>=1.9.1]")
+
+    def requirements(self):
+        self.requires("spdlog/[>=1.11.0]")
 
     def build(self):
         cmake = CMake(self)
