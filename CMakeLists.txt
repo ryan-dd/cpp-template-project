@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 
 set(SampleProject_VERSION 1.0.0)
+
 project(SampleProject 
   VERSION ${SampleProject_VERSION}
   DESCRIPTION "A sample template cmake project"

@@ -5,6 +5,9 @@ compile_commands.json
 .cache
 .ccls-cache
 
+# For now
+CMake*Presets.json
+
 # Mac
 .DS_Store
 
