@@ -1,0 +1,5 @@
+function(enable_sanitizers project_name)
+  set(LIST_OF_SANITIZERS address,undefined)
+  target_compile_options(${project_name} PRIVATE -fsanitize=${LIST_OF_SANITIZERS})
+  target_link_options(${project_name} PRIVATE -fsanitize=${LIST_OF_SANITIZERS})
+endfunction()

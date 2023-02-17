@@ -14,6 +14,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Add cmake utility functions
 include(CompilerWarnings)
 include(StaticAnalyzers)
+include(Sanitizers)
 
 add_subdirectory(src)
 
