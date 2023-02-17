@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "SampleClass.h"
+#include "SampleProject/SampleClass.h"
 
 TEST(SampleTest, doSomething)
 {
