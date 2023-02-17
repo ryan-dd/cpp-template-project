@@ -1,5 +1,6 @@
-find_package(GTest REQUIRED)
+include(CTest)
 
+find_package(GTest REQUIRED)
 add_executable(unit_tests 
   SampleTest.cpp
 )
