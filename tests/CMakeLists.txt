@@ -20,7 +20,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   append_coverage_compiler_flags_to_target(unit_tests)
   setup_target_for_coverage_gcovr_html(
       NAME coverage # target name
-      EXECUTABLE ctest -j ${PROCESSOR_COUNT}
+      EXECUTABLE ctest -j
       DEPENDENCIES unit_tests
   )
 endif()
