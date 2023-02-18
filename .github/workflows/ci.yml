@@ -1,15 +1,13 @@
 name: ci
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
-      - github-actions
+      - main
 
 env:
-  # Conan cache environment variables
-  CONAN_SYSREQUIRES_MODE: enabled
   CONAN_USER_HOME: "${{ github.workspace }}/conan-cache"
-  CONAN_USER_HOME_SHORT: "${{ github.workspace }}/conan-cache/short"
 
 jobs:
   Test:
@@ -19,6 +17,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+          # - macos-latest - buggy
         compiler:
           - llvm
           - gcc
