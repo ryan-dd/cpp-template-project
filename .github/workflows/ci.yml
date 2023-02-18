@@ -2,9 +2,10 @@ name: ci
 on:
   workflow_dispatch:
   pull_request:
-  push:
-    branches:
-      - main
+  # Uncomment to run workflow every push to main
+  # push:
+  #   branches:
+  #     - main
 
 env:
   CONAN_USER_HOME: "${{ github.workspace }}/conan-cache"
