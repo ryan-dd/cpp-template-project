@@ -48,12 +48,12 @@ jobs:
           gcovr: true
       - name: Install dependencies
         run: |
-          conan install . -o build_tests=False -s build_type=${{ matrix.build_type }} -if=./build -b missing
+          conan install . -o build_docs=False -s build_type=${{ matrix.build_type }} -if=./build -b missing
       - name: Build
         run: |
           conan build . -bf=./build
 
-      # - name : Test
-      #   working-directory: ./build
-      #   run: |
-      #     ctest -C ${{matrix.build_type}}
+      - name : Test
+        working-directory: ./build
+        run: |
+          ctest -C ${{matrix.build_type}}
