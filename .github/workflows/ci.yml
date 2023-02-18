@@ -1,0 +1,49 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches:
+      - github-actions
+
+jobs:
+  Test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        compiler:
+          - llvm
+          - gcc
+        build_type:
+          - Release
+          - Debug
+    steps:
+      - uses: actions/checkout@v2
+
+      # - name: Cache
+      #     uses: actions/cache@v2
+      #     with:
+      #       path: |
+      #         ~/.cache/pip
+      #       key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}}}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('./conanfile.txt')}}-${{ hashFiles('./vcpkg.json')}}
+      #       restore-keys: |
+      #         ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
+
+      - name: Setup Cpp
+        uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          cmake: true
+          make: true
+          conan: true
+          gcovr: true
+      - name: Install dependencies
+          run: conan install . -s build_type=${{ matrix.BUILD_TYPE }} -if=./build
+      - name: Build
+          run: conan build . -bf=./build
+      - name : Test
+          working-directory: ./build
+          run: ctest -C ${{matrix.build_type}}
