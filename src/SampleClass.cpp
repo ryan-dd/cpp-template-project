@@ -4,6 +4,7 @@
 void SampleClass::do_something()
 {
   std::cout << "Hello World";
+
 }
 
 
