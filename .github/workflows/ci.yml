@@ -23,14 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Cache
-      #     uses: actions/cache@v2
-      #     with:
-      #       path: |
-      #         ~/.cache/pip
-      #       key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}}}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('./conanfile.txt')}}-${{ hashFiles('./vcpkg.json')}}
-      #       restore-keys: |
-      #         ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
+      - name: Cache
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/.cache/pip
+              ~/.conan
+            key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}}}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('./conanfile.txt')}}
+            restore-keys: |
+              ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
 
       - name: Setup Cpp
         uses: aminya/setup-cpp@v1
@@ -42,7 +43,7 @@ jobs:
           gcovr: true
       - name: Install dependencies
         run: |
-          conan install . -s build_type=${{ matrix.build_type }} -if=./build
+          conan install . -s build_type=${{ matrix.build_type }} -if=./build -b missing
       - name: Build
         run: |
           conan build . -bf=./build
