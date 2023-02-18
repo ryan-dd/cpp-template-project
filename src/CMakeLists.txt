@@ -57,7 +57,10 @@ install (TARGETS ${PROJECT_NAME}
 
 install( DIRECTORY ${PROJECT_SOURCE_DIR}/include/
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-  FILES_MATCHING PATTERN "*.h")
+  FILES_MATCHING 
+  PATTERN "*.h"
+  PATTERN "*.hpp"
+)
 
 install(
     FILES "${project_config_file}" "${version_config_file}"
