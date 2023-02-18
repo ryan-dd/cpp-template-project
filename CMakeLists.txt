@@ -8,7 +8,7 @@ project(SampleProject
   LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL) 
-  # Only use these options if this CMakeLists.txt is not being used by another project 
+  # Only use these options if this project is not a subdirectory of another project 
   set(CMAKE_CXX_STANDARD 20)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
