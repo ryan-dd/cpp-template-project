@@ -24,14 +24,14 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Cache
-          uses: actions/cache@v2
-          with:
-            path: |
-              ~/.cache/pip
-              ~/.conan
-            key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}}}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('./conanfile.txt')}}
-            restore-keys: |
-              ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.conan
+          key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}}}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('**/conanfile.txt')}}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
 
       - name: Setup Cpp
         uses: aminya/setup-cpp@v1
