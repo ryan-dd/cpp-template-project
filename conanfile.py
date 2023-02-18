@@ -5,7 +5,12 @@ import os
 
 class SampleProjectConan(ConanFile):
     name = "SampleProject"
-    version = "1.0.0"
+
+    def set_version(self):
+        content = tools.load(os.path.join(self.recipe_folder, "CMakeLists.txt"))
+        version = re.search(r"set\(SampleProject_VERSION (.*)\)", content).group(1)
+        self.version = version.strip()
+
     url = "https://github.com/ryan-dd/cpp-template-project"
     license = "MIT"
     description = "C++ template project"
