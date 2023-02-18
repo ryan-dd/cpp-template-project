@@ -58,4 +58,4 @@ cmake --install build
 
 # Contributing
 
-Contributions to the project that fix errata and update to best practices are much appreciated. Feel free to reach out to the author.
+Contributions that fix errata are much appreciated. Feel free to reach out to the author about any issues.
