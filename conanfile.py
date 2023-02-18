@@ -1,7 +1,7 @@
-from conans import ConanFile, CMake
+from conans import ConanFile, CMake, tools
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
-from conans.tools import load
 import re
+import os
 
 class SampleProjectConan(ConanFile):
     name = "SampleProject"
@@ -54,4 +54,7 @@ class SampleProjectConan(ConanFile):
     def package(self):
         cmake = CMake(self)
         cmake.install()
+        tools.rmdir(os.path.join(self.package_folder, "lib", "cmake"))
 
+    def package_info(self):
+        self.cpp_info.libs.append("SampleProject")
