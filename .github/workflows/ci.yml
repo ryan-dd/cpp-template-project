@@ -19,9 +19,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          # - macos-latest
         compiler:
-          # - llvm
+          - llvm
           - gcc
         build_type:
           - Release
