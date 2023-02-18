@@ -41,7 +41,7 @@ jobs:
           conan: true
           gcovr: true
       - name: Install dependencies
-          run: conan install . -s build_type=${{ matrix.BUILD_TYPE }} -if=./build
+          run: conan install . -s build_type=${{ matrix.build_type }} -if=./build
       - name: Build
           run: conan build . -bf=./build
       - name : Test
