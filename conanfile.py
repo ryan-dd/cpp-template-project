@@ -43,9 +43,6 @@ class SampleProjectConan(ConanFile):
         if(self.options.build_docs):
             self.tool_requires("doxygen/[>=1.9.1]")
 
-    def requirements(self):
-        self.requires("spdlog/[>=1.11.0]")
-
     def build(self):
         cmake = CMake(self)
         cmake.configure()

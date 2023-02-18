@@ -1,0 +1,58 @@
+name: ci
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  CONAN_USER_HOME: "${{ github.workspace }}/conan-cache"
+
+jobs:
+  Test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          # - macos-latest - buggy
+        compiler:
+          - llvm
+          - gcc
+        build_type:
+          - Release
+          - Debug
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ env.CONAN_USER_HOME }}
+          key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
+
+      - name: Setup Cpp
+        uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          cmake: true
+          make: true
+          conan: true
+          gcovr: true
+      - name: Install dependencies
+        run: |
+          conan install . -o build_docs=False -s build_type=${{ matrix.build_type }} -if=./build -b missing
+      - name: Build
+        run: |
+          conan build . -bf=./build
+
+      - name : Test
+        working-directory: ./build
+        run: |
+          ctest -C ${{matrix.build_type}}
+
