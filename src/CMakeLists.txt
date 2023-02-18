@@ -7,9 +7,6 @@ else()
   add_library(${PROJECT_NAME} ${SRCS})
 endif()
 
-find_package(spdlog REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
-
 # Require consumers to use C++20
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 

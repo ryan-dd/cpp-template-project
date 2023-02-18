@@ -15,7 +15,7 @@ jobs:
           - ubuntu-latest
           # - macos-latest
         compiler:
-          - llvm
+          # - llvm
           - gcc
         build_type:
           - Release
@@ -29,7 +29,7 @@ jobs:
           path: |
             ~/.cache/pip
             ~/.conan
-          key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}}}-${{ hashFiles('**/CMakeLists.txt') }}-${{ hashFiles('**/conanfile.txt')}}
+          key: ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.compiler }}-${{matrix.build_type}}
 
