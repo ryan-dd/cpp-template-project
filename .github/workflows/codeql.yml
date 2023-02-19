@@ -42,7 +42,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        conan install . -o build_docs=False -if=./build -b missing
+        conan install . -o build_docs=False -o build_tests=False -if=./build -b missing
 
     - name: Build
       run: |
