@@ -1,7 +1,6 @@
 # cpp-template-project
 
-![ci](https://github.com/ryan-dd/cpp-template-project/actions/workflows/ci.yml/badge.svg)
-
+[![Build Status](https://github.com/ryan-dd/cpp-template-project/actions/workflows/ci.yml/badge.svg)](https://github.com/ryan-dd/cpp-template-project/actions)
 A template repo to set up a project for a C++ library. Targeted for Linux or MacOS with gcc or clang.
 
 # Features
