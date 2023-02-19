@@ -43,9 +43,9 @@ class SampleProjectConan(ConanFile):
         tc.generate()
 
     def build_requirements(self):
-        if(self.options.build_tests):
+        if self.options.build_tests:
             self.test_requires("gtest/[>=1.8.1]")
-        if(self.options.build_docs):
+        if self.options.build_docs:
             self.tool_requires("doxygen/[>=1.9.1]")
 
     def build(self):
