@@ -16,7 +16,6 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          # - macos-latest - buggy
         compiler:
           - llvm
           - gcc
