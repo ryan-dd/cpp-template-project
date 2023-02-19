@@ -7,6 +7,10 @@ project(SampleProject
   DESCRIPTION "A sample template cmake project" 
   LANGUAGES CXX)
 
+# Add path to cmake utility functions
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(CompilerWarnings)
+
 if(PROJECT_IS_TOP_LEVEL) 
   # Only use these options if this project is not a subdirectory of another project 
   set(CMAKE_CXX_STANDARD 20)
@@ -16,27 +20,27 @@ if(PROJECT_IS_TOP_LEVEL)
   set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # for LSP support
   set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)
 
-  if(NOT DEFINED SampleProject_BUILD_TESTS)
-    set(SampleProject_BUILD_TESTS ON)
-  endif()
+  include(StaticAnalyzers)
 
-  if(NOT DEFINED SampleProject_BUILD_DOCS)
-    set(SampleProject_BUILD_DOCS ON)
+  option(SampleProject_BUILD_TESTS "Enable building tests" ON)
+  option(SampleProject_BUILD_DOCS "Enable building docs" ON)
+
+  if(SampleProject_BUILD_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    option(SampleProject_ENABLE_COVERAGE "Enable coverage target for tests" ON)
   endif()
 endif()
 
-# Add cmake utility functions
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(CompilerWarnings)
-include(StaticAnalyzers)
-include(Sanitizers)
-
-if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND SampleProject_BUILD_TESTS)
-  # Only do code coverage in debug with tests
-  include(CodeCoverage)
-  append_coverage_compiler_flags()
+if (SampleProject_BUILD_TESTS AND SampleProject_ENABLE_COVERAGE)
+    include(CodeCoverage)
+    append_coverage_compiler_flags()
+    setup_target_for_coverage_gcovr_html(
+        NAME coverage # target name
+        EXECUTABLE ctest -j
+        DEPENDENCIES unit_tests
+    )
 endif()
 
+option(SampleProject_BUILD_SHARED_LIBS "Build project libraries as shared libraries" OFF)
 add_subdirectory(src)
 
 if (SampleProject_BUILD_TESTS)

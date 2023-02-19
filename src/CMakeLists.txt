@@ -12,12 +12,6 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 
 set_project_warnings(${PROJECT_NAME})
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND SampleProject_BUILD_TESTS)
-  # Add options to target for running tests in debug
-  append_coverage_compiler_flags_to_target(${PROJECT_NAME})
-  enable_sanitizers(${PROJECT_NAME})
-endif()
-
 target_include_directories(${PROJECT_NAME} 
   PUBLIC 
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
