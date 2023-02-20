@@ -10,6 +10,7 @@ project(SampleProject
 # Add path to cmake utility functions
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(CompilerWarnings)
+include(Sanitizers)
 
 if (PROJECT_IS_TOP_LEVEL) 
   # Only use these options if this project is not a subdirectory of another project 
@@ -23,9 +24,16 @@ if (PROJECT_IS_TOP_LEVEL)
 
   option(SampleProject_BUILD_TESTS "Enable building tests" ON)
   option(SampleProject_BUILD_DOCS "Enable building docs" ON)
+  option(SampleProject_ENABLE_SANITIZERS "Enable Sanitizers" OFF)
 
   if (SampleProject_BUILD_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     option(SampleProject_ENABLE_COVERAGE "Enable coverage target for tests" ON)
+  endif()
+
+  if (SampleProject_ENABLE_SANITIZERS)
+    # Default to address and UB sanitizers
+    option(SampleProject_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" ON)
+    option(SampleProject_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR "Enable UB sanitizer" ON)
   endif()
 endif()
 

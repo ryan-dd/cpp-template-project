@@ -1,4 +1,4 @@
-# Add library
+### Add library ###
 set(SRCS SampleClass.cpp)
 
 if (SampleProject_BUILD_SHARED_LIBS)
@@ -26,11 +26,20 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 
 set_project_warnings(${PROJECT_NAME})
 
+if (SampleProject_ENABLE_SANITIZERS)
+  enable_sanitizers(${PROJECT_NAME}
+    SampleProject_ENABLE_SANITIZER_ADDRESS
+    SampleProject_ENABLE_SANITIZER_LEAK
+    SampleProject_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR
+    SampleProject_ENABLE_SANITIZER_THREAD
+    SampleProject_ENABLE_SANITIZER_MEMORY)
+endif()
+
 # Add namespaced alias
 set(namespace "${PROJECT_NAME}")
 add_library("${namespace}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
 
-# Generate CMake files for finding the package after installation
+### Generate CMake files for finding the package after installation ###
 set(version_config_file "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake")
 set(project_config_file "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
 set(targets_export_filename "${PROJECT_NAME}Targets")
