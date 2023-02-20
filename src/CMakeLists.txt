@@ -16,7 +16,6 @@ target_include_directories(${PROJECT_NAME}
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}>"
 )
 
-# Set target other target properties
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if(target_type STREQUAL STATIC_LIBRARY AND SampleProject_fPIC)
   set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
@@ -26,7 +25,6 @@ endif()
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 
 set_project_warnings(${PROJECT_NAME})
-
 
 # Add namespaced alias
 set(namespace "${PROJECT_NAME}")
