@@ -24,22 +24,27 @@ class SampleProjectConan(ConanFile):
     }
 
     options = {
+        "shared": [True, False],
+        "fPIC": [True, False],
         "build_tests": [True, False],
         "build_docs": [True, False],
-        "build_shared_libs": [True, False]
         }
 
     default_options = {
+        "shared": False,
+        "fPIC": True,
         "build_tests": True,
         "build_docs": True,
-        "build_shared_libs": False
         }
+
+    def configure(self):
+        if self.options.shared:
+            del self.options.fPIC
 
     def generate(self):
         tc = CMakeToolchain(self)
         tc.variables['SampleProject_BUILD_TESTS'] = self.options.build_tests
         tc.variables['SampleProject_BUILD_DOCS'] = self.options.build_docs
-        tc.variables['SampleProject_BUILD_SHARED_LIBS'] = self.options.build_shared_libs
         tc.generate()
 
     def build_requirements(self):
@@ -60,3 +65,8 @@ class SampleProjectConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs.append("SampleProject")
+
+    def package_id(self):
+        # Make convenience build options have no effect on the package_id
+        del self.info.options.build_tests
+        del self.info.options.build_docs

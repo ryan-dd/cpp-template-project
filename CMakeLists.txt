@@ -15,7 +15,6 @@ if(PROJECT_IS_TOP_LEVEL)
   # Only use these options if this project is not a subdirectory of another project 
   set(CMAKE_CXX_STANDARD 20)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
-  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
   set(CMAKE_CXX_EXTENSIONS OFF)
   set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # for LSP support
   set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)

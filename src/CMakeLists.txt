@@ -1,16 +1,12 @@
-
+# Add library
 set(SRCS SampleClass.cpp)
 
 if(SampleProject_BUILD_SHARED_LIBS)
   add_library(${PROJECT_NAME} SHARED ${SRCS})
 else()
+  # Either build static (default) or allow cmake var BUILD_SHARED_LIBS to determine build type
   add_library(${PROJECT_NAME} ${SRCS})
 endif()
-
-# Require consumers to use C++20
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
-
-set_project_warnings(${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME} 
   PUBLIC 
@@ -19,6 +15,18 @@ target_include_directories(${PROJECT_NAME}
   PRIVATE
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}>"
 )
+
+# Set target other target properties
+get_target_property(target_type ${PROJECT_NAME} TYPE)
+if(target_type STREQUAL STATIC_LIBRARY AND SampleProject_fPIC)
+  set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
+
+# Require consumers to use C++20
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+
+set_project_warnings(${PROJECT_NAME})
+
 
 # Add namespaced alias
 set(namespace "${PROJECT_NAME}")
