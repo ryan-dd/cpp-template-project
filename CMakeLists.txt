@@ -33,13 +33,14 @@ if (SampleProject_BUILD_TESTS AND SampleProject_ENABLE_COVERAGE)
     include(CodeCoverage)
     append_coverage_compiler_flags()
     setup_target_for_coverage_gcovr_html(
-        NAME coverage # target name
+        NAME coverage
         EXECUTABLE ctest -j
         DEPENDENCIES unit_tests
     )
 endif()
 
 option(SampleProject_BUILD_SHARED_LIBS "Build project libraries as shared libraries" OFF)
+option(SampleProject_fPIC "Enable position independent code" ON)
 add_subdirectory(src)
 
 if (SampleProject_BUILD_TESTS)
