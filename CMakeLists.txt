@@ -36,6 +36,7 @@ if (SampleProject_BUILD_TESTS AND SampleProject_ENABLE_COVERAGE)
         NAME coverage
         EXECUTABLE ctest -j
         DEPENDENCIES unit_tests
+        BASE_DIRECTORY src
     )
 endif()
 
