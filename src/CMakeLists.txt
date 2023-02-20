@@ -1,7 +1,7 @@
 # Add library
 set(SRCS SampleClass.cpp)
 
-if(SampleProject_BUILD_SHARED_LIBS)
+if (SampleProject_BUILD_SHARED_LIBS)
   add_library(${PROJECT_NAME} SHARED ${SRCS})
 else()
   # Either build static (default) or allow cmake var BUILD_SHARED_LIBS to determine build type
@@ -17,7 +17,7 @@ target_include_directories(${PROJECT_NAME}
 )
 
 get_target_property(target_type ${PROJECT_NAME} TYPE)
-if(target_type STREQUAL STATIC_LIBRARY AND SampleProject_fPIC)
+if (target_type STREQUAL STATIC_LIBRARY AND SampleProject_fPIC)
   set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif()
 

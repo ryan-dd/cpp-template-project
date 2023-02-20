@@ -11,7 +11,7 @@ project(SampleProject
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(CompilerWarnings)
 
-if(PROJECT_IS_TOP_LEVEL) 
+if (PROJECT_IS_TOP_LEVEL) 
   # Only use these options if this project is not a subdirectory of another project 
   set(CMAKE_CXX_STANDARD 20)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -24,7 +24,7 @@ if(PROJECT_IS_TOP_LEVEL)
   option(SampleProject_BUILD_TESTS "Enable building tests" ON)
   option(SampleProject_BUILD_DOCS "Enable building docs" ON)
 
-  if(SampleProject_BUILD_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if (SampleProject_BUILD_TESTS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     option(SampleProject_ENABLE_COVERAGE "Enable coverage target for tests" ON)
   endif()
 endif()
