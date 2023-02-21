@@ -47,6 +47,9 @@ class SampleProjectConan(ConanFile):
         tc.variables['SampleProject_BUILD_DOCS'] = self.options.build_docs
         tc.generate()
 
+    def requirements(self):
+        self.requires("spdlog/[>1.9.0]")
+
     def build_requirements(self):
         if self.options.build_tests:
             self.test_requires("gtest/[>=1.8.1]")

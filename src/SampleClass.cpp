@@ -1,10 +1,9 @@
 #include "SampleClass.h"
-#include <iostream>
+#include <spdlog/spdlog.h>
 
 void SampleClass::do_something()
 {
-  std::cout << "Hello World";
-
+  spdlog::info("Hello World");
 }
 
 

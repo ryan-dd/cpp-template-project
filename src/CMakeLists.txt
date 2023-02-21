@@ -16,6 +16,9 @@ target_include_directories(${PROJECT_NAME}
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}>"
 )
 
+find_package(spdlog REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
+
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL STATIC_LIBRARY AND SampleProject_fPIC)
   set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
