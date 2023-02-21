@@ -1,6 +1,7 @@
 # cpp-template-project
 
-[![Build Status](https://github.com/ryan-dd/cpp-template-project/actions/workflows/build.yml/badge.svg)](https://github.com/ryan-dd/cpp-template-project/actions)
+[![Build Status](https://github.com/ryan-dd/cpp-template-project/actions/workflows/build.yml/badge.svg)](https://github.com/ryan-dd/cpp-template-project/actions/workflows/build.yml)
+[![CodeQL Status](https://github.com/ryan-dd/cpp-template-project/actions/workflows/codeql.yml/badge.svg)](https://github.com/ryan-dd/cpp-template-project/actions/workflows/codeql.yml)
 
 A template repo to set up a project for a C++ library. Targeted for Linux or MacOS with gcc or clang.
 
