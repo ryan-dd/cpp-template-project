@@ -52,7 +52,7 @@ jobs:
       - name: Build
         working-directory: ./build
         run: |
-          conan build .. -bf=./build
+          conan build ..
 
       - name : Test
         working-directory: ./build
