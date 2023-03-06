@@ -32,8 +32,10 @@ The static analyzers must also be installed to use them.
 ## With conan 
 
 ```bash
-conan install . -if build
-conan build . -if build
+mkdir build
+cd build
+conan install ..
+conan build ..
 ```
 
 ## Without conan

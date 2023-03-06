@@ -15,7 +15,7 @@ class SampleProjectConan(ConanFile):
     license = "MIT"
     description = "C++ template project"
     settings = "os", "compiler", "arch", "build_type"
-    generators = "CMakeToolchain", "CMakeDeps"
+    generators = "CMakeDeps", "CMakeToolchain"
 
     scm = {
         "type": "git",
@@ -40,6 +40,9 @@ class SampleProjectConan(ConanFile):
     def configure(self):
         if self.options.shared:
             del self.options.fPIC
+
+    def layout(self):
+        cmake_layout(self)
 
     def generate(self):
         tc = CMakeToolchain(self)
