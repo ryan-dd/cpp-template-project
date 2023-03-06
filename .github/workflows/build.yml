@@ -42,12 +42,17 @@ jobs:
           make: true
           conan: true
           gcovr: true
+
       - name: Install dependencies
         run: |
-          conan install . -o build_docs=False -s build_type=${{ matrix.build_type }} -if=./build -b missing
+          mkdir build
+          cd build
+          conan install .. -o build_docs=False -s build_type=${{ matrix.build_type }} -b missing
+
       - name: Build
+        working-directory: ./build
         run: |
-          conan build . -bf=./build
+          conan build .. -bf=./build
 
       - name : Test
         working-directory: ./build
